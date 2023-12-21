@@ -1,6 +1,27 @@
 let playerScore = 0;
 let computerScore = 0;
 
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+const displayPlayerScore = document.querySelector('#player-score');
+const displayComputerScore = document.querySelector('#computer-score');
+const opponentChoice = document.querySelector('#opponent-choice');
+const displayResult = document.querySelector('#display-result');
+
+
+rock.addEventListener('click', () => {
+    playRound("ROCK");
+});
+
+paper.addEventListener('click', () => {
+    playRound("PAPER");
+});
+
+scissors.addEventListener('click', () => {
+    playRound("SCISSORS");
+});
+
 const items = ["ROCK", "PAPER", "SCISSORS"];
 
 const outcomes = {
@@ -9,42 +30,27 @@ const outcomes = {
     "SCISSORS": { beats: "PAPER", message: "You Win!" },
 };
 
-const getComputerChoice = () => items[Math.floor(Math.random() * items.length)].toUpperCase();
+const getComputerChoice = () => items[Math.floor(Math.random() * items.length)];
 
-function round() {
-    const playerSelection = prompt("Rock, Paper, or Scissors? ").toUpperCase();
+function playRound(playerSelection) {
     const computerSelection = getComputerChoice();
 
-    if (items.includes(playerSelection)) {
-        alert("Opponent selected: " + computerSelection);
+    opponentChoice.textContent = `Opponent Selected:\n${computerSelection}`;
+    opponentChoice.style.whiteSpace = 'pre';
 
-        if (playerSelection === computerSelection) {
-            alert("It's a tie!")
-            alert("Your score: " + playerScore + "\nOpponent score: " + computerScore);
-        } else if (outcomes[computerSelection].beats === playerSelection) {
-            computerScore += 1;
-            alert("You Lose!");
-            alert("Your score: " + playerScore + "\nOpponent score: " + computerScore);
-        } else {
-            playerScore += 1;
-            alert(outcomes[playerSelection].message);
-            alert("Your score: " + playerScore + "\nOpponent score: " + computerScore);
-        }
+    if (playerSelection === computerSelection) {
+        displayResult.textContent = "\nIt's a tie!";
+    } else if (outcomes[computerSelection].beats === playerSelection) {
+        computerScore += 1;
+        displayResult.textContent = "\nYou Lose!";
     } else {
-        alert("Invalid Input!");
+        playerScore += 1;
+        displayResult.textContent = "\n" + outcomes[playerSelection].message;
     }
+
+    displayComputerScore.textContent = `Enemy Score:\n${computerScore}`;
+    displayComputerScore.style.whiteSpace = 'pre';
+
+    displayPlayerScore.textContent = `Player Score:\n${playerScore}`;
+    displayPlayerScore.style.whiteSpace = 'pre';
 }
-
-function game() {
-    while (computerScore < 5 && playerScore < 5) {
-        round();
-    }
-
-    if (playerScore == 5) {
-        alert("Player wins!");
-    } else {
-        alert("Opponent wins!");
-    }
-}
-
-game();

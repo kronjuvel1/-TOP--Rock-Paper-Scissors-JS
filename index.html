@@ -4,8 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="main-container">
+        <h1>Rock-Paper-Scissors</h1>
+        <div id="display-score">
+            <div id="player-score">Player Score: <br>0</div>
+            <div id="computer-score">Enemy Score: <br>0</div>
+        </div>
+
+        <div id="display-container">
+            <div id="opponent-choice"></div>
+            <div id="display-result"></div>
+        </div>
+
+        <div id="list-container">
+            <ul>
+                <li><button id="rock">Rock</button></li>
+                <li><button id="paper">Paper</button></li>
+                <li><button id="scissors">Scissors</button></li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
